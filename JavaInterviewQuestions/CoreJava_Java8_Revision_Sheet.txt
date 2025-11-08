@@ -1,0 +1,84 @@
+Core Java + Java 8 Final Revision Sheet
+---------------------------------------------------
+
+1️⃣ OOP Core Concepts
+Encapsulation – wrapping data & methods (private fields + getters/setters)
+Inheritance – reuse behavior from parent class (class B extends A)
+Polymorphism – same method behaves differently (method overriding)
+Abstraction – hiding details (abstract class / interface)
+
+2️⃣ Access Modifiers
+public: accessible everywhere
+protected: same package + subclasses
+default: same package only
+private: same class only
+
+3️⃣ Exception Handling
+try – code that may throw exception
+catch – handles exception
+finally – always runs
+throw – manually throw exception
+throws – declare exception in method signature
+
+Checked exceptions (IOException, SQLException) – compile-time
+Unchecked exceptions (NullPointerException, ArithmeticException) – runtime
+
+4️⃣ Multithreading
+Thread – smallest execution unit
+Runnable – interface for thread logic
+start() – starts new thread
+run() – thread logic
+join() – waits for thread
+sleep() – pauses
+synchronized – ensures one thread at a time
+ExecutorService – manages thread pool
+
+5️⃣ File Handling (java.io)
+FileReader – reads characters
+BufferedReader – reads efficiently (readLine())
+FileWriter – writes characters
+BufferedWriter – writes efficiently (newLine())
+
+6️⃣ JDBC (java.sql)
+Steps:
+1. Load Driver – Class.forName("com.mysql.cj.jdbc.Driver")
+2. Connect – DriverManager.getConnection(url, user, pass)
+3. Statement – con.createStatement()
+4. Execute – executeQuery(), executeUpdate()
+5. Process ResultSet – rs.next()
+6. Close – con.close()
+
+7️⃣ Functional Interfaces (Java 8)
+Function<T,R> – transform (map)
+Predicate<T> – filter (boolean test)
+Consumer<T> – consume (forEach)
+Supplier<T> – provide value (generate)
+
+8️⃣ Method References
+System.out::println – method ref
+String::toUpperCase – instance method ref
+ClassName::new – constructor ref
+
+9️⃣ Optional
+Optional.of(), ofNullable(), empty()
+orElse(default)
+
+10️⃣ Stream API
+filter() – test
+map() – transform
+forEach() – consume
+collect() – gather
+groupingBy() – group by property
+
+11️⃣ Interview Tips
+Process vs Thread – process independent, thread lightweight
+start() vs run() – start() = new thread, run() = same thread
+throw vs throws – throw to raise, throws to declare
+Checked vs Unchecked – compile-time vs runtime
+Functional Interface – one abstract method
+BufferedReader faster than FileReader
+JDBC package – java.sql
+ResultSet – SELECT data
+
+---------------------------------------------------
+You’re now interview-ready for Core Java + Java 8!
