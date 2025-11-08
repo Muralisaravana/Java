@@ -1,0 +1,12 @@
+| Question                                           | Quick Answer                                                                      |                   |
+| -------------------------------------------------- | --------------------------------------------------------------------------------- | ----------------- |
+| 1. What is an Exception?                           | An event that disrupts normal program flow.                                       |                   |
+| 2. Difference between Checked & Unchecked?         | Checked = compile-time (IOException), Unchecked = runtime (NullPointerException). |                   |
+| 3. Difference between Error and Exception?         | Error → system failure, not recoverable; Exception → can handle in code.          |                   |
+| 4. What is the purpose of try–catch?               | To handle exceptions gracefully without stopping the program.                     |                   |
+| 5. Can you have multiple catch blocks?             | Yes, for handling different exception types.                                      |                   |
+| 6. What does finally do?                           | Executes always, even after exception or return.                                  |                   |
+| 7. Difference between throw and throws?            | throw → throw exception, throws → declare it in method signature.                 |                   |
+| 8. Can you catch multiple exceptions in one block? | Yes, Java 7+ supports `catch (IOException                                         | SQLException e)`. |
+| 9. What is a custom exception?                     | A user-defined class extending Exception.                                         |                   |
+| 10. What happens if exception not handled?         | JVM terminates the program abnormally.                                            |                   |

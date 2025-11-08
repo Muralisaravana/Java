@@ -1,0 +1,45 @@
+What is an Exception?
+An exception is an unexpected event that disrupts the normal flow of a program.
+
+Error = System-level issue (JVM crash, OutOfMemory)
+Exception = Something you can handle in code
+
+Hierarchy:
+Throwable
+   ├── Error (JVM-level, not recoverable)
+   └── Exception
+         ├── Checked Exception
+         └── Unchecked Exception (Runtime)
+
+
+Checked vs Unchecked:
+| Type          | Examples                                                         | When Checked | Needs `try/catch` or `throws`? |
+| ------------- | ---------------------------------------------------------------- | ------------ | ------------------------------ |
+| **Checked**   | IOException, SQLException                                        | Compile-time | ✅ Yes                          |
+| **Unchecked** | NullPointerException, ArithmeticException, ArrayIndexOutOfBounds | Runtime      | ❌ No (optional)                |
+
+
+// Checked Exception
+FileReader f = new FileReader("abc.txt");  // must handle using try/catch
+
+// Unchecked Exception
+int x = 10 / 0;  // ArithmeticException
+
+finally is always executed — even if there’s an exception or return statement (except when JVM exits).
+
+throw and throws:
+| Keyword  | Purpose                                                                      | Example                                          |
+| -------- | ---------------------------------------------------------------------------- | ------------------------------------------------ |
+| `throw`  | Used to **manually throw** an exception                                      | `throw new ArithmeticException("Invalid calc");` |
+| `throws` | Used in method signature to **declare** that a method may throw an exception | `void readFile() throws IOException`             |
+
+
+| Keyword   | Meaning                         |
+| --------- | ------------------------------- |
+| try       | Code that might throw exception |
+| catch     | Handles the exception           |
+| finally   | Always executes (cleanup code)  |
+| throw     | Manually throw an exception     |
+| throws    | Declares exception in method    |
+| Exception | Recoverable issue               |
+| Error     | Serious system-level failure    |
