@@ -51,15 +51,6 @@ printer.accept("Murali"); // Output: Hello, Murali
 
 ✅ Common use: logging, printing, saving to DB, etc.
 
-⚙️ 4️⃣ Summary Table of Functional Interfaces
-Interface	Input	Output	Method	Example Use
-Runnable	none	void	run()	run code in thread
-Callable<V>	none	V	call()	run code in thread & get result
-Comparator<T>	T, T	int	compare(T,T)	sorting
-Function<T,R>	T	R	apply(T)	mapping, conversion
-Predicate<T>	T	boolean	test(T)	filtering, condition
-Supplier<T>	none	T	get()	lazy value provider
-Consumer<T>	T	void	accept(T)	process or consume value
 
 
 
@@ -68,7 +59,15 @@ Consumer<T>	T	void	accept(T)	process or consume value
 | `Function`   | Like a **machine**: you give input, it gives output 🎰                  |
 | `Predicate`  | Like a **judge**: says true/false ⚖️                                    |
 | `Supplier`   | Like a **vending machine**: gives you an item without input 🥤          |
-| `Consumer`   | Like a **trash bin**: accepts something and doesn’t return anything 🗑️ |
+| `Consumer`   | Like a **trash bin**: accepts something and doesn’t return anything 🗑️  |
 | `Runnable`   | Like a **task runner**: just runs 🚀                                    |
 | `Callable`   | Like a **task runner that returns result** 🧾                           |
 | `Comparator` | Like a **referee**: decides who’s greater 🏁                            |
+
+| Interface          | Package              | Method              | Input | Output        | Use                |
+| ------------------ | -------------------- | ------------------- | ----- | ------------- | ------------------ |
+| **Function<T, R>** | `java.util.function` | `R apply(T t)`      | Yes   | Yes           | Transform data     |
+| **Predicate<T>**   | `java.util.function` | `boolean test(T t)` | Yes   | Yes (boolean) | Filter / condition |
+| **Consumer<T>**    | `java.util.function` | `void accept(T t)`  | Yes   | No            | Perform an action  |
+| **Supplier<T>**    | `java.util.function` | `T get()`           | No    | Yes           | Provide data       |
+

@@ -1,0 +1,19 @@
+What is a Predicate?
+A Predicate is a boolean-valued function —
+it takes an input, tests a condition, and returns true or false.
+test() is the abstract method that performs the action.
+
+import java.util.*;
+import java.util.function.Predicate;
+
+public class PredicateStreamExample {
+    public static void main(String[] args) {
+        List<String> names = Arrays.asList("Murali", "Saravanan", "Selva", "Karthik");
+
+        Predicate<String> startsWithS = s -> s.startsWith("S");
+
+        names.stream()
+             .filter(startsWithS)              // Predicate used here
+             .forEach(System.out::println);    // prints only names starting with S
+    }
+}

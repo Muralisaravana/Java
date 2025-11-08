@@ -1,0 +1,29 @@
+What is a Supplier?
+
+Supplier is part of java.util.function package.
+It does not take any input
+It returns (supplies) a value of type T
+So, it’s the opposite of Consumer.
+get() is the abstract method
+
+| Concept         | Description                                                   |
+| --------------- | ------------------------------------------------------------- |
+| **Supplier**    | A functional interface that **supplies** values without input |
+| **Method**      | `T get()`                                                     |
+| **Common Uses** | Generate randoms, default values, lazy initialization         |
+| **Analogy**     | 🥤 Vending machine — you don’t give input, it gives output    |
+| **In Streams**  | Used with `Stream.generate()`                                 |
+
+
+import java.util.function.Supplier;
+import java.util.stream.Stream;
+
+public class SupplierStreamExample {
+    public static void main(String[] args) {
+        Supplier<Double> randomSupplier = () -> Math.random();
+
+        Stream.generate(randomSupplier)  // Infinite stream of random numbers
+              .limit(5)                  // Take only first 5
+              .forEach(System.out::println);  // Print each
+    }
+}

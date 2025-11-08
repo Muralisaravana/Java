@@ -1,0 +1,69 @@
+Primary Function (Main Purpose) of Streams
+
+Streams in Java 8 are used to process data from collections efficiently, clearly, and functionally 
+— without writing boilerplate loops.
+
+Restrictions / Rules / Limitations of Streams:
+Stream can be consumed only once - Once a stream is operated on (with a terminal operation),
+ you cannot reuse it.
+
+Streams don’t store data - They don’t modify or hold the original data; they just process it temporarily. 
+
+Streams work with functional interfaces - You use lambda expressions or method references with Stream operations:
+map(Function)
+filter(Predicate)
+forEach(Consumer)
+They have rules: single-use, lazy, non-storing data, and rely on functional interfaces.
+
+| Stream Functionality              | Description                        | Example                           |
+| --------------------------------- | ---------------------------------- | --------------------------------- |
+| **Transformation (map)**          | Convert elements into another form | Convert lowercase to uppercase    |
+| **Filtering (filter)**            | Select only certain elements       | Keep only names starting with "S" |
+| **Sorting (sorted)**              | Arrange data                       | Sort numbers ascending            |
+| **Aggregation (reduce)**          | Combine elements into one result   | Sum all numbers                   |
+| **Collecting (collect / toList)** | Gather results into a collection   | Convert stream to List or Set     |
+| **Iteration (forEach)**           | Perform action on each element     | Print each item                   |
+
+
+after you call .stream(), you can chain stream operations, 
+and those operations fall into two types — intermediate and terminal.
+
+You don’t have to call .map() or .filter() specifically —
+you can use any intermediate operations that make sense for your data —
+but the pipeline must always end with a terminal operation like .toList() or .forEach() to actually execute.
+
+Two types of operations on streams
+🟦 Intermediate operations
+
+These transform or filter the stream and return another Stream.
+They are lazy — they don’t execute immediately
+
+| Operation            | Purpose                  | Uses Functional Interface |
+| -------------------- | ------------------------ | ------------------------- |
+| `.map(Function)`     | Transform each element   | Function                  |
+| `.filter(Predicate)` | Keep matching elements   | Predicate                 |
+| `.sorted()`          | Sort elements            | Comparator                |
+| `.distinct()`        | Remove duplicates        | —                         |
+| `.limit(n)`          | Take first n elements    | —                         |
+| `.skip(n)`           | Skip first n elements    | —                         |
+| `.peek(Consumer)`    | Debug / inspect elements | Consumer                  |
+
+
+
+Terminal operations
+
+These trigger the stream pipeline —
+they consume the stream and produce a result (list, count, print, etc.).
+
+| Operation                       | Purpose                                | Uses Functional Interface |
+| ------------------------------- | -------------------------------------- | ------------------------- |
+| `.forEach(Consumer)`            | Perform action (e.g. print)            | Consumer                  |
+| `.collect(Collectors.toList())` | Collect results into a list            | Collector                 |
+| `.toList()` *(Java 16+)*        | Collect results into an immutable list | —                         |
+| `.count()`                      | Count elements                         | —                         |
+| `.findFirst()`                  | Return first element                   | —                         |
+| `.findAny()`                    | Return any element                     | —                         |
+| `.anyMatch(Predicate)`          | Check if any element matches           | Predicate                 |
+| `.allMatch(Predicate)`          | Check if all elements match            | Predicate                 |
+| `.noneMatch(Predicate)`         | Check if none match                    | Predicate                 |
+| `.reduce()`                     | Combine elements into one result       | BinaryOperator            |

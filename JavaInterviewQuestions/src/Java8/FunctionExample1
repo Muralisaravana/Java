@@ -1,24 +1,8 @@
 Function<T, R> — Transforms input → output
 
-Before Java 8:
+apply() is the abstract method that performs the action.
 
-import java.util.*;
-
-public class FunctionOld {
-    public static void main(String[] args) {
-        List<String> names = Arrays.asList("Murali", "Vijay", "Arun");
-
-        // Convert to uppercase manually
-        List<String> upper = new ArrayList<>();
-        for (String name : names) {
-            upper.add(name.toUpperCase());
-        }
-
-        System.out.println(upper); // [MURALI, VIJAY, ARUN]
-    }
-}
-
-After Java 8 :
+Java 8 :
 
 import java.util.*;
 import java.util.function.Function;
