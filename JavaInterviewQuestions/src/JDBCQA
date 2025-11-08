@@ -1,0 +1,22 @@
+| Question                                          | Short Answer                                                            |
+| ------------------------------------------------- | ----------------------------------------------------------------------- |
+| What is JDBC?                                     | API to connect and interact with databases from Java.                   |
+| Which package contains JDBC classes?              | `java.sql`.                                                             |
+| Steps in JDBC?                                    | Load driver → Connect → Statement → Execute → Process → Close.          |
+| Difference between Statement & PreparedStatement? | PreparedStatement supports parameters (`?`) and prevents SQL injection. |
+| What is ResultSet?                                | A table of data returned by a SELECT query.                             |
+| What are executeQuery() and executeUpdate()?      | `executeQuery()` → SELECT; `executeUpdate()` → INSERT/UPDATE/DELETE.    |
+| What is SQLException?                             | Exception thrown for DB-related issues.                                 |
+| What does Class.forName() do?                     | Loads JDBC driver class into memory.                                    |
+| Can we skip Class.forName()?                      | From JDBC 4.0 (Java 6+), drivers auto-load if JAR is in classpath.      |
+| How do you close DB resources safely?             | Use try-with-resources or finally block.                                |
+
+
+| Component         | Purpose                       | Example                         |
+| ----------------- | ----------------------------- | ------------------------------- |
+| DriverManager     | Manage DB connections         | `DriverManager.getConnection()` |
+| Connection        | Represents DB link            | `Connection con = ...`          |
+| Statement         | Execute queries               | `stmt.executeQuery()`           |
+| PreparedStatement | Execute parameterized queries | `ps.setString(1, "Murali")`     |
+| ResultSet         | Holds query result            | `rs.next()`                     |
+| SQLException      | Catches DB errors             | `catch(SQLException e)`         |

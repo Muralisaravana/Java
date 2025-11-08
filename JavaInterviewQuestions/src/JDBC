@@ -1,0 +1,64 @@
+What is JDBC?
+
+JDBC (Java Database Connectivity) is an API (set of classes & interfaces) 
+that allows Java programs to connect to a database, 
+execute SQL queries, and retrieve results.
+
+It’s part of the java.sql package.
+
+JDBC Architecture:
+Java Application
+      ↓
+ JDBC API (java.sql)
+      ↓
+ JDBC Driver
+      ↓
+ Database (MySQL, Oracle, PostgreSQL)
+
+ 
+ Steps to connect to Database:
+ | Step | Description          | Example                                                          |
+| ---- | -------------------- | ---------------------------------------------------------------- |
+| 1️⃣  | Load the JDBC Driver | `Class.forName("com.mysql.cj.jdbc.Driver");`                     |
+| 2️⃣  | Establish Connection | `Connection con = DriverManager.getConnection(url, user, pass);` |
+| 3️⃣  | Create Statement     | `Statement stmt = con.createStatement();`                        |
+| 4️⃣  | Execute SQL Query    | `ResultSet rs = stmt.executeQuery("SELECT * FROM emp");`         |
+| 5️⃣  | Process Results      | `while(rs.next()) { ... }`                                       |
+| 6️⃣  | Close Connection     | `con.close();`                                                   |
+ 
+ 
+ | Interface / Class   | Purpose                                      |
+| ------------------- | -------------------------------------------- |
+| `DriverManager`     | Manages database drivers & connections       |
+| `Connection`        | Represents connection to database            |
+| `Statement`         | Executes SQL queries                         |
+| `PreparedStatement` | Executes parameterized SQL queries (safer)   |
+| `ResultSet`         | Represents data returned from a SELECT query |
+| `SQLException`      | Handles database-related exceptions          |
+ 
+ 
+
+| Type                | Description                           | Use Case                                   |
+| ------------------- | ------------------------------------- | ------------------------------------------ |
+| `Statement`         | Executes static SQL queries           | For fixed SQL like `"SELECT * FROM table"` |
+| `PreparedStatement` | Precompiled SQL with parameters (`?`) | For dynamic SQL; prevents SQL injection    |
+| `CallableStatement` | Used to call stored procedures        | For DB functions/procedures                |
+
+
+| Method            | Used With              | Purpose                             |
+| ----------------- | ---------------------- | ----------------------------------- |
+| `executeQuery()`  | SELECT                 | Returns `ResultSet`                 |
+| `executeUpdate()` | INSERT, UPDATE, DELETE | Returns number of rows affected     |
+| `execute()`       | Any SQL                | Returns boolean (true if ResultSet) |
+ 
+ 
+ 
+ JDBC Exception Handling
+
+All database errors throw SQLException.
+You should handle them like this:
+catch (SQLException e) {
+    System.out.println("Error Code: " + e.getErrorCode());
+    System.out.println("SQL State: " + e.getSQLState());
+    System.out.println("Message: " + e.getMessage());
+}
