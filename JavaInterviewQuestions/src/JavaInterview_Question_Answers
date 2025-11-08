@@ -1,4 +1,6 @@
-1. Difference between Composition and Inheritance.
+1. 1. Can you explain the difference between composition and inheritance?
+When would you prefer one over the other?
+
 Inheritance: Child class inherits behavior from parent class using extends. 
 Used for is-a relationship
 Example: class Dog extends Animal
@@ -10,3 +12,99 @@ Example: class Car { Engine engine; }
 When to prefer:
 composition — it gives flexibility and reduces tight coupling.
 Use inheritance only when subclass truly “is a” parent (behaviorally).
+
+-----
+
+2. What are the key principles of OOP, 
+and how do you ensure they’re applied effectively in large codebases?
+
+Encapsulation – Hide internal data; expose through getters/setters
+Abstraction – Hide complexity; expose only required functionality.
+Inheritance – Reuse behavior from base class.
+Polymorphism – Same method behaves differently (overriding).
+
+As a tech lead: enforce via design reviews, interfaces, 
+and clean class boundaries to reduce coupling.
+
+-----
+
+3.Explain how hashCode() and equals() work together.
+ What could happen if they are not implemented properly?
+ 
+If two objects are equal (equals() returns true), they must have the same hashCode().
+If not followed → inconsistent behavior in HashMap, HashSet, etc. (e.g., missing elements).
+
+Best practice:
+Use Objects.hash() or @EqualsAndHashCode (Lombok) to ensure correctness. 
+
+-----
+
+4. Why is String immutable in Java? What are the advantages and possible drawbacks of this design?
+
+Security: prevents modification of sensitive data (e.g., URLs, file paths).
+Thread Safety: shared safely across threads.
+Hashing: used as keys in HashMap; immutability ensures consistent hash.
+Performance: String Pool optimization.
+
+Drawback: Frequent concatenation creates new objects (use StringBuilder instead).
+
+-----
+
+5. Difference between String, StringBuilder, and StringBuffer. When to use which?
+
+String → Immutable, safe, slow.
+StringBuffer → Mutable, thread-safe(because its synchronized allow operations one after another),
+ moderate speed.
+StringBuilder → Mutable, not thread-safe(not synchronized multiple string access same resource results in corrupted date)
+,fastest.
+
+-------
+6. How does the intern() method work for strings?
+
+intern() used to move or link String object from heap to SCP
+Moves a String to the String Pool and returns a reference from there.
+If the same literal exists, returns pooled reference → saves memory
+
+------
+7. What are final, finally, and finalize() — and how are they different?
+
+final - “you can’t change or override this” after it’s created
+can't change final variable, can't override final method, can't extend final class.
+
+finally - block of code that always runs, no matter what happens — success, failure, or exception.
+
+finalize() - method in the Object class that is called by the Garbage Collector (GC) 
+before destroying an object.
+it’s deprecated now in modern Java — replaced by better tools like try-catch,cleaner resources
+
+-----
+
+8. Explain how == and .equals() differ for objects and primitives.
+
+== → compares references (memory location)
+equals() → compares content (if overridden properly).
+
+-----
+9. Can you explain how Java handles parameter passing — is it by value or by reference?
+
+Java is always pass-by-value.
+
+For primitives → copies the value.
+
+For objects → copies the reference (so both refer to same object).
+
+-----
+
+10. What’s the difference between a shallow copy and a deep copy? How would you implement deep copy? 
+
+Shallow copy: Copies fields as-is (shared object references).
+
+Deep copy: Recursively copies entire object graph.
+
+When deep copy? — when mutable objects are referenced inside another object.
+
+Employee e2 = new Employee(e1); // shallow copy
+Employee e3 = SerializationUtils.clone(e1); // deep copy
+
+
+-----
