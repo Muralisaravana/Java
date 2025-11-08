@@ -1,0 +1,8 @@
+1. Difference between Composition and Inheritance.
+Inheritance: Child class inherits behavior from parent class using extends. 
+Used for is-a relationship
+Example: class Dog extends Animal
+
+Composition: Class contains objects of other classes as fields. 
+Used for has-a relationship.
+Example: class Car { Engine engine; }
