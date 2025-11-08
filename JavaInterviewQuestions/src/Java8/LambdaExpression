@@ -1,0 +1,34 @@
+A lambda expression is basically a short form of writing an anonymous method (a method without a name).
+
+It’s Java’s way of writing code that behaves like a function and can be passed around as data.
+
+Syntax:
+(parameter) -> expression
+
+
+Main Use / Purpose of Lambda Expressions:
+
+Make code shorter and cleaner
+Enable use of functional interfaces (interfaces with one abstract method)
+Allow you to pass behavior (functions) as arguments
+Support the new Streams API
+
+Core uses of Lambda expressions:
+
+| Purpose                                    | Explanation                                 | Example                                                  |
+| ------------------------------------------ | ------------------------------------------- | -------------------------------------------------------- |
+| **1. Implement Functional Interfaces**     | Replace anonymous classes                   | `Runnable r = () -> System.out.println("Run");`          |
+| **2. Make Stream operations concise**      | Used in `.map()`, `.filter()`, `.forEach()` | `list.stream().filter(s -> s.startsWith("S")).toList();` |
+| **3. Pass behavior as parameter**          | Methods can take “functions”                | `doWork(() -> System.out.println("Work done"));`         |
+| **4. Enable functional-style programming** | Cleaner and expressive code                 | `names.forEach(n -> System.out.println(n));`             |
+
+
+Summary:
+| Aspect            | Explanation                                                     |
+| ----------------- | --------------------------------------------------------------- |
+| **Introduced in** | Java 8                                                          |
+| **Purpose**       | To simplify code and enable functional programming              |
+| **Replaces**      | Anonymous inner classes                                         |
+| **Works with**    | Functional interfaces                                           |
+| **Common uses**   | Streams (`map`, `filter`, `forEach`), event handling, threading |
+| **Syntax**        | `(parameters) -> expression`                                    |

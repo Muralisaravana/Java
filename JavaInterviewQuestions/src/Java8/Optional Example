@@ -1,0 +1,23 @@
+Optional is a container object —
+it may contain a value, or it may be empty (no value present).
+
+In other words:
+Instead of returning null, a method can return an Optional<T>
+to explicitly say “there might or might not be a value”
+
+| Method                       | Description                                     |
+| ---------------------------- | ----------------------------------------------- |
+| `Optional.of(value)`         | Wraps a **non-null** value (throws NPE if null) |
+| `Optional.ofNullable(value)` | Wraps a value that **may be null**              |
+| `Optional.empty()`           | Creates an empty Optional                       |
+
+Accessing the value inside an Optional
+| Method                  | Use                                                     | Example                                |
+| ----------------------- | ------------------------------------------------------- | -------------------------------------- |
+| `.isPresent()`          | Check if value exists                                   | `if(opt.isPresent()) ...`              |
+| `.get()`                | Get value (unsafe — may throw `NoSuchElementException`) | `opt.get()`                            |
+| `.orElse(defaultValue)` | Return value or default if empty                        | `opt.orElse("Guest")`                  |
+| `.orElseGet(Supplier)`  | Return value or use supplier to compute default         | `opt.orElseGet(() -> "GeneratedName")` |
+| `.ifPresent(Consumer)`  | Execute action only if value exists                     | `opt.ifPresent(System.out::println)`   |
+| `.map(Function)`        | Transform the value if present                          | `opt.map(String::toUpperCase)`         |
+| `.filter(Predicate)`    | Keep value only if condition matches                    | `opt.filter(s -> s.startsWith("S"))`   |

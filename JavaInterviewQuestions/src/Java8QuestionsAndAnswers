@@ -23,27 +23,124 @@ System.out.println(c.add(5, 3)); // 8
 
 2. How do map(), filter(), and reduce() work in streams? Can you give a real-world example combining them?
 
+| Method     | Purpose                             | Example                                        |
+| ---------- | ----------------------------------- | ---------------------------------------------- |
+| `map()`    | Transforms elements                 | `list.stream().map(String::toUpperCase)`       |
+| `filter()` | Selects elements matching predicate | `list.stream().filter(s -> s.startsWith("A"))` |
+| `reduce()` | Aggregates into a single result     | `list.stream().reduce("", (a,b) -> a+b)`       |
+
+List<String> names = List.of("Alice","Bob","Anita","Alex");
+String result = names.stream()
+                     .filter(n -> n.startsWith("A"))
+                     .map(String::toUpperCase)
+                     .reduce("", (a,b) -> a + b);
+System.out.println(result); // ALICEANITALEX
+
+
 -----
 
 3. Difference between Stream and ParallelStream. When would you not use parallel streams?
 
+stream() → sequential processing on a single thread.
+
+parallelStream() → splits work into multiple threads (ForkJoinPool).
+
+
+When not to use parallel:
+
+For small data sets (thread overhead > gain).
+
+When operations are stateful or dependent.
+
+When the source isn’t efficiently splittable (e.g., I/O streams).
+
+✅ Lead insight: Use parallel only for CPU-intensive, stateless, independent operations on large collections.
 
 -----
 
 4. What’s the difference between Optional.of(), Optional.ofNullable(), and Optional.empty()?
 
+Optional.of(value) → throws NullPointerException if value is null.
+
+Optional.ofNullable(value) → allows null and returns Optional.empty() if null.
+
+Optional.empty() → explicit empty instance.
+
+Optional<String> name = Optional.ofNullable(getName());
+name.ifPresentOrElse(System.out::println, () -> System.out.println("No name"));
+
+
+Lead insight: Use Optional to avoid null-checks, 
+but don’t use it in entity fields or method parameters—only for return types.
+
 -----
 
 5. What is the purpose of Collectors.groupingBy()? Show a use case.
+
+Used to group stream elements by a classifier function.
+
+Map<String, List<Employee>> byDept =
+  employees.stream()
+           .collect(Collectors.groupingBy(Employee::getDepartment));
+
 
 -----
 
 6. How do you handle checked exceptions inside a lambda?
 
+Lambdas can’t throw checked exceptions directly unless declared in the functional interface.
+Options:
+
+Wrap checked exception in RuntimeException.
+
+Create custom functional interface declaring throws.
+
+Utility wrapper method to rethrow.
+
+list.forEach(item -> {
+    try { process(item); }
+    catch(IOException e) { throw new UncheckedIOException(e); }
+});
+
 -----
 
 7. Can you explain how default and static methods in interfaces help in backward compatibility?
 
+Introduced for backward compatibility — to add new behavior without breaking existing implementations.
+
+Default method:
+interface Vehicle {
+    default void start() { System.out.println("Vehicle starting..."); }
+}
+
+Static method:
+interface Vehicle {
+    static void info() { System.out.println("Static info"); }
+}
+
+
+
 -----
 
 8. What is method reference? When is it preferable over lambda?
+
+A concise shorthand for a lambda that calls an existing method.
+
+| Type        | Example               |
+| ----------- | --------------------- |
+| Static      | `Math::max`           |
+| Instance    | `System.out::println` |
+| Constructor | `ArrayList::new`      |
+
+List<String> names = List.of("a","b","c");
+names.forEach(System.out::println);
+
+Method references improve readability, especially in stream chains—prefer them when the lambda simply delegates to another method.
+
+usage of method reference:
+| Type                                       | Example               | Equivalent Lambda            |
+| ------------------------------------------ | --------------------- | ---------------------------- |
+| 1️⃣ **Object::instanceMethod**             | `System.out::println` | `x -> System.out.println(x)` |
+| 2️⃣ **Class::staticMethod**                | `Math::max`           | `(a, b) -> Math.max(a, b)`   |
+| 3️⃣ **Class::instanceMethod**              | `String::toUpperCase` | `s -> s.toUpperCase()`       |
+| 4️⃣ **ClassName::new** *(constructor ref)* | `ArrayList::new`      | `() -> new ArrayList<>()`    |
