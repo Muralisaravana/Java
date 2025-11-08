@@ -1,0 +1,48 @@
+What is File Handling?
+
+File handling in Java means reading from and writing to files stored on your system —
+for example, reading data from a .txt file or writing logs to a file.
+
+All file-related classes are in the package:
+👉 java.io
+
+| Class                                  | Purpose                               |
+| -------------------------------------- | ------------------------------------- |
+| `File`                                 | Represents file or directory path     |
+| `FileReader`                           | Reads characters from file            |
+| `BufferedReader`                       | Reads text efficiently (line by line) |
+| `FileWriter`                           | Writes characters to file             |
+| `BufferedWriter`                       | Writes text efficiently               |
+| `FileInputStream` / `FileOutputStream` | Read/write binary data (images, etc.) |
+
+FileReader vs BufferedReader | FileWriter vs BufferedWriter
+
+These pairs are closely related —
+👉 the FileReader / FileWriter classes perform basic file reading/writing,
+👉 while BufferedReader / BufferedWriter add a layer of efficiency (buffering).
+
+| Feature         | `FileReader`                                     | `BufferedReader`                                |
+| --------------- | ------------------------------------------------ | ----------------------------------------------- |
+| **Purpose**     | Reads characters from a file (basic reading)     | Reads text efficiently using a **buffer**       |
+| **Speed**       | Slower — reads one character at a time           | Faster — reads large chunks at once (buffered)  |
+| **Buffering**   | ❌ No internal buffer                             | ✅ Uses an internal buffer (default 8KB)         |
+| **Read Method** | `read()` (single char)                           | `readLine()` (whole line), `read()`             |
+| **Usage**       | Good for small files or simple character reading | Best for reading large text files, line-by-line |
+
+
+ Feature | `FileWriter` | `BufferedWriter` |
+|----------|---------------|------------------|
+| **Purpose** | Writes characters directly to a file | Writes characters efficiently using a **buffer** |
+| **Speed** | Slower — writes each character directly to disk | Faster — stores in memory first, writes in bulk |
+| **Buffering** | ❌ No buffer | ✅ Uses an internal buffer (default 8KB) |
+| **Convenience** | Must handle writing manually | Has extra methods like `newLine()` |
+| **Usage** | For simple or small writes | For large data or frequent writes |
+
+
+| Pair    | Basic Class | Buffered Class | Difference                                      |
+| ------- | ----------- | -------------- | ----------------------------------------------- |
+| Reading | FileReader  | BufferedReader | BufferedReader is faster, supports `readLine()` |
+| Writing | FileWriter  | BufferedWriter | BufferedWriter is faster, supports `newLine()`  |
+
+FileReader/FileWriter perform simple character-level file operations directly.
+BufferedReader/BufferedWriter add a memory buffer, improving performance by reducing disk I/O and allowing convenient methods like readLine() and newLine()
