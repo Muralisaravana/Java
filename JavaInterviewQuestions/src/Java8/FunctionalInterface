@@ -1,0 +1,74 @@
+Java 8 Built-in Functional Interfaces (in java.util.function)
+
+Java 8 introduced standard functional interfaces
+
+Here are the main four, often remembered as the “Big 4”:
+
+🧠 1. Function<T, R>
+
+📘 Purpose: Takes one input (T) → returns a result (R)
+
+Function<Integer, String> f = n -> "Value is " + n;
+System.out.println(f.apply(10)); // Output: Value is 10
+
+
+🧠 Layman: “I give you something, you give me something back.”
+
+🧠 2. Predicate<T>
+
+📘 Purpose: Takes one input (T) → returns boolean
+
+Predicate<Integer> isEven = n -> n % 2 == 0;
+System.out.println(isEven.test(10)); // true
+System.out.println(isEven.test(7));  // false
+
+
+🧠 Layman: “You give me something, I’ll say true or false.”
+
+✅ Common use: filtering, validation, conditions
+
+🧠 3. Supplier<T>
+
+📘 Purpose: Takes no input, returns a value (T)
+
+Supplier<Double> randomValue = () -> Math.random();
+System.out.println(randomValue.get()); // Example: 0.457892
+
+
+🧠 Layman: “I don’t need anything from you — I’ll just give you something.”
+
+✅ Common use: random values, object creation, config data
+
+🧠 4. Consumer<T>
+
+📘 Purpose: Takes one input (T) → returns nothing
+
+Consumer<String> printer = name -> System.out.println("Hello, " + name);
+printer.accept("Murali"); // Output: Hello, Murali
+
+
+🧠 Layman: “You give me something, and I’ll just use it — I won’t return anything.”
+
+✅ Common use: logging, printing, saving to DB, etc.
+
+⚙️ 4️⃣ Summary Table of Functional Interfaces
+Interface	Input	Output	Method	Example Use
+Runnable	none	void	run()	run code in thread
+Callable<V>	none	V	call()	run code in thread & get result
+Comparator<T>	T, T	int	compare(T,T)	sorting
+Function<T,R>	T	R	apply(T)	mapping, conversion
+Predicate<T>	T	boolean	test(T)	filtering, condition
+Supplier<T>	none	T	get()	lazy value provider
+Consumer<T>	T	void	accept(T)	process or consume value
+
+
+
+| Interface    | Analogy                                                                 |
+| ------------ | ----------------------------------------------------------------------- |
+| `Function`   | Like a **machine**: you give input, it gives output 🎰                  |
+| `Predicate`  | Like a **judge**: says true/false ⚖️                                    |
+| `Supplier`   | Like a **vending machine**: gives you an item without input 🥤          |
+| `Consumer`   | Like a **trash bin**: accepts something and doesn’t return anything 🗑️ |
+| `Runnable`   | Like a **task runner**: just runs 🚀                                    |
+| `Callable`   | Like a **task runner that returns result** 🧾                           |
+| `Comparator` | Like a **referee**: decides who’s greater 🏁                            |

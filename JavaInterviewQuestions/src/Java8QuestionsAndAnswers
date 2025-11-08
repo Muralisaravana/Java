@@ -1,0 +1,49 @@
+1. Explain the concept of functional interfaces and give some examples.
+
+A functional interface has exactly one abstract method, allowing it to be used in a lambda expression.
+
+example of Functional Interfaces:
+| Interface         | Abstract Method           | Description                                                           |
+| ----------------- | ------------------------- | --------------------------------------------------------------------- |
+| Runnable          | void run()`               | Runs a task without returning anything                                |
+| Callable<V>       | V call()`                 | Runs a task and returns a value (like `Runnable` but with result)     |
+| Comparator<T>     | int compare(T o1, T o2)`  | Compares two objects for sorting                                      |
+
+
+e.g.,
+@FunctionalInterface
+interface Calculator {
+    int add(int a, int b);
+}
+
+Calculator c = (x, y) -> x + y;
+System.out.println(c.add(5, 3)); // 8
+
+-----
+
+2. How do map(), filter(), and reduce() work in streams? Can you give a real-world example combining them?
+
+-----
+
+3. Difference between Stream and ParallelStream. When would you not use parallel streams?
+
+
+-----
+
+4. What’s the difference between Optional.of(), Optional.ofNullable(), and Optional.empty()?
+
+-----
+
+5. What is the purpose of Collectors.groupingBy()? Show a use case.
+
+-----
+
+6. How do you handle checked exceptions inside a lambda?
+
+-----
+
+7. Can you explain how default and static methods in interfaces help in backward compatibility?
+
+-----
+
+8. What is method reference? When is it preferable over lambda?
