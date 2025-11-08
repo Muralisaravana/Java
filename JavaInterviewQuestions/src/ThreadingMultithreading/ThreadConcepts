@@ -1,0 +1,51 @@
+A Thread is the smallest unit of execution inside a program.
+A process has its own memory; threads share the same memory.
+
+Analogy:
+Think of a restaurant (process). 
+Each waiter (thread) serves customers independently but shares the same kitchen (memory).
+
+Multithreading = running multiple tasks at once
+
+Advantages:
+Better CPU utilization
+Perform background tasks (e.g., downloading, processing)
+
+Disadvantages:
+Harder to debug, possible race conditions
+
+==>start() launches a new thread; calling run() directly just runs in the main thread
+
+==>Runnable is preferred because it separates the task (logic) from the thread (execution)
+
+| Method          | Description                                | Example                             |
+| --------------- | ------------------------------------------ | ----------------------------------- |
+| `start()`       | Starts thread (runs `run()` in new thread) | `t1.start();`                       |
+| `sleep(ms)`     | Pause thread temporarily                   | `Thread.sleep(1000);`               |
+| `join()`        | Wait for a thread to finish                | `t1.join();`                        |
+| `getName()`     | Returns thread name                        | `Thread.currentThread().getName();` |
+| `setPriority()` | Change priority (1–10)                     | `t1.setPriority(8);`                |
+
+
+If two threads update shared data, results become unpredictable (called race condition)
+
+synchronized ensures only one thread enters the method at a time.
+
+| Keyword        | Purpose                                                    |
+| -------------- | ---------------------------------------------------------- |
+| synchronized` | Ensures only one thread accesses a resource at a time      |
+| Method level   | Locks the entire method                                    |
+| Block level    | Locks only specific code section                           |
+| Lock type      | Object lock (`this`) or Class lock (`static synchronized`) |
+
+
+| Question                                                      | Short Answer                           |
+| ------------------------------------------------------------- | -------------------------------------- |
+| What problem does synchronization solve?                      | Race condition / data inconsistency    |
+| Can two threads execute synchronized method at once?          | No, they take turns                    |
+| What is the difference between synchronized method and block? | Block gives finer control              |
+| Can static methods be synchronized?                           | Yes, uses class-level lock             |
+| Does synchronization slow performance?                        | Yes, slightly, due to locking overhead |
+
+
+ExecutorService reuses threads instead of creating new ones each time — efficient for multiple tasks

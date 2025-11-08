@@ -1,0 +1,53 @@
+| Stage                                     | Description                                                            | Transition Trigger                              |
+| ----------------------------------------- | ---------------------------------------------------------------------- | ----------------------------------------------- |
+| 1️⃣ **NEW**                               | Thread object is created but not yet started.                          | When you create thread using `new Thread()`     |
+| 2️⃣ **RUNNABLE**                          | Thread is ready to run or waiting for CPU.                             | When `start()` is called                        |
+| 3️⃣ **RUNNING**                           | Thread is currently executing its `run()` method.                      | When CPU picks it from scheduler                |
+| 4️⃣ **BLOCKED / WAITING / TIMED_WAITING** | Thread is temporarily inactive — waiting for resource, sleep, or join. | When `sleep()`, `join()`, or waiting for a lock |
+| 5️⃣ **TERMINATED (DEAD)**                 | Thread has finished execution.                                         | When `run()` method completes                   |
+
+       +--------+
+       |  NEW   |  ---> created using new Thread()
+       +--------+
+            |
+        start()
+            ↓
+       +------------+
+       |  RUNNABLE  | ---> waiting for CPU time
+       +------------+
+            |
+        CPU schedules
+            ↓
+       +-----------+
+       |  RUNNING  | ---> executing run() method
+       +-----------+
+         |      |
+   sleep()/wait() | run() completes
+         ↓      ↓
+ +--------------------+     +--------------+
+ | WAITING/BLOCKED    |     | TERMINATED   |
+ +--------------------+     +--------------+
+
+ NEW:
+ Thread t = new Thread(() -> System.out.println("Hello"));
+ 
+ RUNNABLE:
+ t.start(); // now RUNNABLE
+ 
+ RUNNING
+ When the CPU scheduler picks the thread, it becomes RUNNING.
+ Executes the run() method.
+ This state is managed by JVM and OS — you cannot force it manually
+ 
+ WAITING / BLOCKED / TIMED_WAITING
+ | Method                            | State                   |
+| --------------------------------- | ----------------------- |
+| `sleep(ms)`                       | TIMED_WAITING           |
+| `join()`                          | WAITING / TIMED_WAITING |
+| `wait()`                          | WAITING                 |
+| Waiting for lock (`synchronized`) | BLOCKED                 |
+ 
+ 
+TERMINATED (DEAD)
+Thread finishes its task and exits the run() method.
+Cannot be restarted (calling start() again → IllegalThreadStateException).

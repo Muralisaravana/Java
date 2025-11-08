@@ -1,0 +1,193 @@
+1️⃣ What is Multithreading?
+Multithreading is a feature in Java that allows multiple parts (threads) of a program to run concurrently to improve performance and CPU utilization.
+Analogy: A restaurant (process) where multiple waiters (threads) serve different tables at once.
+
+2️⃣ Process vs Thread
+
+Process:
+
+Independent program in execution.
+
+Has its own memory.
+
+Slower communication between processes.
+
+Thread:
+
+Smallest unit of execution within a process.
+
+Shares memory of the process.
+
+Faster communication (shared data).
+
+Example: Chrome browser = process, Chrome tabs = threads.
+
+3️⃣ Two Ways to Create Threads
+
+(A) Extending Thread:
+
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Running: " + Thread.currentThread().getName());
+    }
+}
+new MyThread().start();
+
+
+(B) Implementing Runnable:
+
+class MyTask implements Runnable {
+    public void run() {
+        System.out.println("Running: " + Thread.currentThread().getName());
+    }
+}
+new Thread(new MyTask()).start();
+
+
+Java 8 shortcut (lambda):
+
+new Thread(() -> System.out.println("Lambda Thread")).start();
+
+
+Runnable is preferred because it separates logic from thread management and allows inheritance.
+
+4️⃣ Thread Lifecycle
+NEW → RUNNABLE → RUNNING → BLOCKED → TERMINATED
+
+start() moves from NEW → RUNNABLE
+
+run() executes
+
+sleep() or wait() → BLOCKED
+
+finishes → TERMINATED
+
+5️⃣ Common Thread Methods
+
+Method	Purpose
+start()	Starts new thread
+run()	Executes task in same thread
+sleep(ms)	Pause for given time
+join()	Wait for thread to finish
+setPriority(n)	1–10, default 5
+getName()	Returns thread name
+isAlive()	Checks if thread is running
+
+Difference:
+
+start() → runs in new thread
+
+run() → runs in main thread (no new thread)
+
+6️⃣ Synchronization (Thread Safety)
+
+Problem: Two threads updating same variable → inconsistent result.
+
+Without synchronized:
+
+class Counter { int count = 0; void increment() { count++; } }
+
+
+With synchronized:
+
+class Counter {
+    int count = 0;
+    synchronized void increment() { count++; }
+}
+
+
+Why: Ensures only one thread accesses the method at a time.
+Prevents race condition (data inconsistency caused by concurrent access).
+
+7️⃣ ExecutorService (Modern Thread Handling)
+
+Example:
+
+import java.util.concurrent.*;
+
+ExecutorService service = Executors.newFixedThreadPool(3);
+
+for (int i = 1; i <= 5; i++) {
+    int taskId = i;
+    service.submit(() -> {
+        System.out.println("Task " + taskId + " by " + Thread.currentThread().getName());
+    });
+}
+
+service.shutdown();
+
+
+Key Points:
+
+Reuses threads for multiple tasks.
+
+Use submit() to run tasks.
+
+shutdown() stops accepting new ones.
+
+Use Callable + Future to return results.
+
+8️⃣ Common Interview Q&A
+
+Q1. What is multithreading?
+→ Running multiple tasks at the same time.
+
+Q2. Difference between process and thread?
+→ Process is independent, thread is part of a process.
+
+Q3. Two ways to create a thread?
+→ Extend Thread or implement Runnable.
+
+Q4. Why is Runnable preferred?
+→ Allows inheritance and better separation of logic.
+
+Q5. Difference between start() and run()?
+→ start() → new thread, run() → same thread.
+
+Q6. What happens if we call start() twice?
+→ Throws IllegalThreadStateException.
+
+Q7. What is synchronized and why needed?
+→ Ensures only one thread accesses resource at a time, prevents data inconsistency.
+
+Q8. What is race condition?
+→ Multiple threads modifying shared data simultaneously, causing incorrect results.
+
+Q9. What is ExecutorService?
+→ Thread pool manager for efficient execution and reuse of threads.
+
+Q10. Can you restart a thread once finished?
+→ No, a thread cannot be restarted once completed.
+
+9️⃣ Quick Memory Hook
+
+T → Thread class
+R → Runnable preferred
+S → start() vs run()
+Y → synchronized keyword
+E → ExecutorService
+
+Remember: “TRY SE” — Thread, Runnable, start/run, synchronized, ExecutorService.
+
+🔟 Sample Output Visualization
+
+Thread-1: 1
+Thread-2: 1
+Thread-1: 2
+Thread-2: 2
+Thread-1: 3
+Thread-2: 3
+
+(Order varies each time — depends on CPU scheduling)
+
+Final Quick Tips:
+
+Threads share memory → synchronize shared variables.
+
+Always use start(), not run(), to start new thread.
+
+ExecutorService is modern standard for multithreading.
+
+Always call shutdown() after tasks complete.
+
+Once finished, threads cannot be restarted.

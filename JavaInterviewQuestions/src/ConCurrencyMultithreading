@@ -1,0 +1,96 @@
+1. What are the main differences between Thread, Runnable, and Callable?
+
+| Concept       | Description                                   | Returns Value? | Throws Exception? |
+| ------------- | --------------------------------------------- | -------------- | ----------------- |
+| `Thread`      | Class that represents a thread                | No             | No                |
+| `Runnable`    | Functional interface (run())                  | No             | No                |
+| `Callable<V>` | Like Runnable but returns result (`V call()`) | ✅ Yes          | ✅ Yes             |
+
+
+
+-----
+2. Explain the difference between synchronized and Lock interface.
+| Feature             | synchronized  | Lock                         |
+| ------------------- | ------------- | ---------------------------- |
+| Reentrant?          | Yes           | Yes (ReentrantLock)          |
+| Fairness            | No control    | Can control fairness         |
+| Timeout             | Not supported | `tryLock(timeout)` supported |
+| Multiple Conditions | No            | Yes via `newCondition()`     |
+| Auto-release        | Yes           | Must unlock manually         |
+
+
+------
+3. How do you prevent race conditions in concurrent code?
+
+Use synchronized blocks or Lock.
+Use atomic classes (AtomicInteger, AtomicReference).
+Use immutable objects wherever possible.
+Avoid shared mutable state between threads.
+
+-----
+4. What is the difference between wait(), notify(), and notifyAll()?
+
+wait() — releases lock and waits.
+notify() — wakes one waiting thread.
+notifyAll() — wakes all waiting threads.
+
+-----
+5. What’s a volatile variable and when should you use it?
+
+Ensures visibility (not atomicity) of variable changes across threads.
+Prevents CPU-level caching of variable values.
+
+-----
+6. Difference between ConcurrentHashMap and HashMap.
+
+| Feature           | HashMap                | ConcurrentHashMap                   |
+| ----------------- | ---------------------- | ----------------------------------- |
+| Thread-Safe       | ❌                      | ✅                                   |
+| Locking Mechanism | None                   | Fine-grained locking (bucket level) |
+| Null Keys/Values  | Allowed                | Not allowed                         |
+| Performance       | Fast (single-threaded) | Efficient in concurrent scenarios   |
+
+
+-----
+7. How does the ForkJoinPool work internally?
+
+Uses work-stealing algorithm to balance workload among threads.
+Ideal for recursive divide-and-conquer tasks.
+
+-----
+8. Explain how Java’s Executor Framework improves thread management.
+Provides thread pooling, task submission, and graceful shutdown.
+Improves resource utilization and system stability
+
+-----
+9. How would you design a producer-consumer system using Java concurrency?
+
+Use a BlockingQueue for safe data exchange.
+BlockingQueue<Integer> queue = new ArrayBlockingQueue<>(5);
+
+Thread producer = new Thread(() -> {
+    for(int i=0; i<10; i++) {
+        try {
+            queue.put(i);
+            System.out.println("Produced " + i);
+        } catch (InterruptedException e) { e.printStackTrace(); }
+    }
+});
+
+Thread consumer = new Thread(() -> {
+    while(true) {
+        try {
+            System.out.println("Consumed " + queue.take());
+        } catch (InterruptedException e) { e.printStackTrace(); }
+    }
+});
+
+producer.start(); consumer.start();
+
+
+-----
+
+10. What are atomic variables and when would you prefer them over synchronization?
+Provide lock-free, thread-safe operations via low-level CPU instructions (CAS – Compare And Swap).
+
+-----
