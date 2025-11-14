@@ -1,0 +1,101 @@
+| Category                | Functions                                                                                                                                              |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Primitive Stream**    | `sum(), max(), min(), average(), count(), summaryStatistics()`                                                                                         |
+| **Collectors**          | `counting(), summingInt(), summingLong(), summingDouble(), averagingInt(), averagingDouble(), maxBy(), minBy(), summarizingInt(), summarizingDouble()` |
+| **Reduce operations**   | `reduce()`, `reduce(identity, accumulator)`                                                                                                            |
+| **Terminal operations** | `findFirst(), findAny()`, `forEach()`                                                                                                                  |
+
+sum()
+int sum = IntStream.of(1, 2, 3).sum();
+System.out.println(sum);   // 6
+
+max()
+int max = IntStream.of(10, 4, 7).max().getAsInt();
+System.out.println(max);   // 10
+
+min()
+int min = IntStream.of(10, 4, 7).min().getAsInt();
+System.out.println(min);   // 4
+
+average()
+double avg = IntStream.of(10, 20, 30).average().getAsDouble();
+System.out.println(avg);   // 20.0
+
+count()
+long c = IntStream.of(5, 6, 7, 8).count();
+System.out.println(c);     // 4
+
+summarystatistics()
+IntSummaryStatistics stats = IntStream.of(5, 10, 20).summaryStatistics();
+System.out.println(stats); // IntSummaryStatistics{count=3, sum=35, min=5, average=11.666667, max=20}
+
+List<Integer> list = Arrays.asList(10, 20, 30);
+counting()
+long c = list.stream().collect(Collectors.counting());
+System.out.println(c);   // 3
+
+summingInt()
+int sum = list.stream().collect(Collectors.summingInt(x -> x));
+System.out.println(sum); // 60
+
+summingLong()
+long sumL = list.stream().collect(Collectors.summingLong(x -> x));
+System.out.println(sumL); // 60
+
+summingDouble()
+double sumD = list.stream().collect(Collectors.summingDouble(x -> x));
+System.out.println(sumD); // 60.0
+
+averagingInt()
+double avg = list.stream().collect(Collectors.averagingInt(x -> x));
+System.out.println(avg);  // 20.0
+
+averagingDouble()
+double avgD = list.stream().collect(Collectors.averagingDouble(x -> x));
+System.out.println(avgD); // 20.0
+
+maxBy()
+Optional<Integer> max = list.stream().collect(Collectors.maxBy(Integer::compare));
+max.ifPresent(System.out::println); // 30
+
+minBy()
+Optional<Integer> min = list.stream().collect(Collectors.minBy(Integer::compare));
+min.ifPresent(System.out::println); // 10
+
+summarizingInt()
+IntSummaryStatistics stats2 = list.stream().collect(Collectors.summarizingInt(x -> x));
+System.out.println(stats2);
+// count=3, sum=60, min=10, average=20.0, max=30
+
+summarizingDouble()
+DoubleSummaryStatistics stats3 = list.stream().collect(Collectors.summarizingDouble(x -> x));
+System.out.println(stats3);
+// count=3, sum=60.0, min=10.0, average=20.0, max=30.0
+
+reduce()
+Optional<Integer> prod = Arrays.asList(2, 3, 4).stream()
+        .reduce((a, b) -> a * b);
+prod.ifPresent(System.out::println);  // 24
+
+reduce(identity, accumulator)
+int sum = Arrays.asList(1, 2, 3).stream()
+        .reduce(0, (a, b) -> a + b);
+System.out.println(sum);  // 6
+
+
+List<String> names = Arrays.asList("ram", "ravi", "raj");
+findFirst()
+names.stream().findFirst().ifPresent(System.out::println);
+// ram
+
+findAny()
+names.stream().findAny().ifPresent(System.out::println);
+// any one element (usually ram)
+
+forEach()
+names.stream().forEach(System.out::println);
+// ram
+// ravi
+// raj
+
+
