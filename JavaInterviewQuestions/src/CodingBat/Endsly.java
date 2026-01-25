@@ -1,5 +1,6 @@
 /*Given a string, return true if it ends in "ly".
 
+Test case:
 
 endsLy("oddly") → true
 endsLy("y") → false
